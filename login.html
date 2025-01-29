@@ -66,6 +66,9 @@
         }
     </style>
     <script>
+
+     
+
         function validateEmail() {
             let email = document.getElementById('email').value;
             let emailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
@@ -124,6 +127,16 @@
             <!-- Submit Button -->
             <button type="submit">Submit</button>
         </form>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const storedData = localStorage.getItem("formData");
+                if (storedData) {
+                    const data = JSON.parse(storedData);
+                    document.getElementById("login_email").value = data.email;
+                    document.getElementById("login_first_name").value = data.username;
+                }
+            });
+        </script>
     </div>
 </body>
 </html>
