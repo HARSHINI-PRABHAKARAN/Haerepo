@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GET Method Example</title>
+</head>
+<body>
+    <h1>Form with GET Method</h1>
+    <form action="/search" method="GET">
+        <label for="query">Search Query:</label>
+        <input type="text" id="query" name="query" placeholder="Type your search..." required><br><br>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="books">Books</option>
+            <option value="movies">Movies</option>
+            <option value="music">Music</option>
+        </select><br><br>
+
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>

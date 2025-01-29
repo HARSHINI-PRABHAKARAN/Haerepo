@@ -81,10 +81,6 @@
             font-size: 14px;
             color: #6c63ff;
         }
-        textarea {
-            width: 100%;
-            height: 80px;
-        }
         button {
             margin-top: 30px;
             padding: 12px 20px;
@@ -125,23 +121,22 @@
         <h2>Your Preference</h2>
         <form action="nextpage.html" method="get">
 
-            <!-- Clothing Style (dropdown only) -->
+            <!-- Clothing Style (Only Dropdown) -->
             <div class="field-group">
                 <label>Clothing Style:</label>
-                <select id="clothing-style" name="clothing-style" onchange="showStylePreference()">
+                <select id="clothing-style" name="clothing-style">
                     <option value="Casual">Casual</option>
                     <option value="Formal">Formal</option>
                     <option value="Ethnic">Ethnic</option>
                     <option value="Party Wear">Party Wear</option>
                 </select>
-                <input id="style-output" readonly type="text">
             </div>
 
-            <!-- Size (text box with onchange) -->
+            <!-- Size Preference (Text Box for Size Input and Output) -->
             <div class="field-group">
                 <label>Size:</label>
-                <input id="size-input" type="text" placeholder="Enter size (e.g. S, M, L)" onchange="showSizePreference()">
-                <input id="size-output" readonly type="text">
+                <input id="size-input" type="text" name="size" oninput="showSizePreference()" placeholder="Enter size (e.g., M)">
+                <input id="size-output" readonly type="text" placeholder="Preferred size will appear here">
             </div>
 
             <!-- Fabric Type -->

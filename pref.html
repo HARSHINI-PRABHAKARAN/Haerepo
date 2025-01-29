@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique Preference Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8e8e8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            padding: 20px;
+        }
+        .container {
+            width: 700px;
+            background: #f2c3b9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #97b3ae;
+            border-radius: 5px;
+            background: #f0dd66;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function calculateAge() {
+            let dob = document.getElementById('dob').value;
+            if (dob) {
+                let birthDate = new Date(dob);
+                let today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                let monthDiff = today.getMonth() - birthDate.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                document.getElementById('age').value = age;
+            }
+        }
+        function displayGender(value) {
+            document.getElementById('genderDisplay').value = value;
+        }
+        function updatePincode() {
+            let city = document.getElementById('city').value;
+            let state = document.getElementById('state').value;
+            let country = document.getElementById('country').value;
+            if (city && state && country) {
+                document.getElementById('pincode').value = "123456";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Boutique Preference Form</h2>
+        <form action="nextpage.html" method="get">
+            <label>Name:</label>
+            <input type="text" name="name" required>
+            
+            <label>Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required onchange="calculateAge()">
+            
+            <label>Age:</label>
+            <input type="text" id="age" name="age" readonly>
+            
+            <label>Gender:</label>
+            <div class="radio-group">
+                <input type="radio" name="gender" value="Male" onclick="displayGender('Male')" required> Male
+                <input type="radio" name="gender" value="Female" onclick="displayGender('Female')"> Female
+                <input type="radio" name="gender" value="Other" onclick="displayGender('Other')"> Other
+            </div>
+            <input type="text" id="genderDisplay" readonly>
+            
+            <label>Address:</label>
+            <textarea name="address" required></textarea>
+            
+            <label>Country:</label>
+            <select id="country" name="country" required onchange="updatePincode()">
+                <option value="">Select</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+            </select>
+            
+            <label>State:</label>
+            <select id="state" name="state" required onchange="updatePincode()">
+                <option value="">Select</option>
+                <option value="State1">State1</option>
+                <option value="State2">State2</option>
+            </select>
+            
+            <label>City:</label>
+            <select id="city" name="city" required onchange="updatePincode()">
+                <option value="">Select</option>
+                <option value="City1">City1</option>
+                <option value="City2">City2</option>
+            </select>
+            
+            <label>Pincode:</label>
+            <input type="text" id="pincode" name="pincode" readonly>
+            
+            <label>Clothing Preference:</label>
+            <select id="clothing" name="clothing">
+                <option value="Casual">Casual</option>
+                <option value="Formal">Formal</option>
+                <option value="Ethnic">Ethnic</option>
+                <option value="Party Wear">Party Wear</option>
+            </select>
+            
+            <label>Fabric Type:</label>
+            <div class="checkbox-group">
+                <input type="checkbox" name="fabric" value="Cotton"> Cotton
+                <input type="checkbox" name="fabric" value="Silk"> Silk
+                <input type="checkbox" name="fabric" value="Linen"> Linen
+            </div>
+            
+            <label>How did you know about us?</label>
+            <div class="checkbox-group">
+                <input type="checkbox" name="source" value="Friends"> Friends
+                <input type="checkbox" name="source" value="Social Media"> Social Media
+                <input type="checkbox" name="source" value="Advertisement"> Advertisement
+            </div>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

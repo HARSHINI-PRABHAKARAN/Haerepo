@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML &lt;keygen&gt; Tag</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            margin: 20px;
+            text-align: center;
+            background: #f9f9f9;
+            font-size: 18px; /* Increased font size */
+        }
+
+        .container {
+            border: 2px solid #007BFF;
+            border-radius: 10px;
+            padding: 20px;
+            background: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #007BFF;
+            font-size: 36px; /* Increased header font size */
+        }
+
+        p {
+            color: #555;
+            font-size: 18px; /* Increased paragraph font size */
+        }
+
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+            font-size: 16px; /* Increased code font size */
+        }
+
+        ul {
+            list-style: square;
+            color: #555;
+            padding-left: 20px;
+            font-size: 18px; /* Increased list font size */
+        }
+
+        footer {
+            margin-top: 20px;
+            color: #555;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        .output-section {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .output-section pre {
+            background: #eef9ff;
+            border-radius: 5px;
+            padding: 15px;
+        }
+
+        .form-container {
+            background: #eef9ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .form-container input, .form-container button {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .form-container button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>HTML <code>&lt;keygen&gt;</code> Tag</h1>
+        <p><i>Generate secure key pairs for web communication.</i></p>
+
+        <div style="text-align: left; border: 1px solid #ddd; padding: 10px; border-radius: 5px; margin-bottom: 15px;">
+            <strong>Syntax:</strong>
+            <pre>&lt;keygen name="key-name"&gt;</pre>
+        </div>
+
+        <h3>Example:</h3>
+        <pre>
+&lt;form method="post" action="submit_key.php"&gt;
+    Name: &lt;input type="text" name="username"&gt;
+    Generate Key: &lt;keygen name="userkey"&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+        </pre>
+        <p style="color: #007BFF;">Upon submission, the public key is securely sent to the server!</p>
+
+        <h3>Key Features:</h3>
+        <ul>
+            <li>Generates public-private key pairs.</li>
+            <li>Easily integrates with forms.</li>
+            <li>Secures sensitive data transfer.</li>
+        </ul>
+
+        <div style="text-align: left; margin-bottom: 15px; background: #eef9ff; padding: 10px; border-radius: 5px;">
+            <strong>💡 Fun Fact:</strong> The <code>&lt;keygen&gt;</code> tag simplifies public key creation but is <u>deprecated</u> in modern browsers due to security updates. Use the Web Crypto API instead!
+        </div>
+
+        <!-- Sample form with keygen -->
+        <div class="form-container">
+            <h3>Try It Yourself:</h3>
+            <form method="post" action="submit_key.php">
+                <label for="username">Name:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your name" required>
+
+                <label for="userkey">Generate Key:</label>
+                <keygen name="userkey" id="userkey"></keygen>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div class="output-section">
+            <h3>Sample Output:</h3>
+            <pre>
+&lt;form method="post" action="submit_key.php"&gt;
+    Name: &lt;input type="text" name="username"&gt;
+    Generate Key: &lt;keygen name="userkey"&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+
+Output on a web page:
+1. The user enters their name in the "username" field.
+2. The user clicks the "Generate Key" button, and the browser
+ generates a public-private key pair.
+3. Upon form submission, only the public key is sent
+ securely to the server for processing.
+            </pre>
+        </div>
+
+        <footer>
+            <p>HTML <code>&lt;keygen&gt;</code> Blog | Simplified for You</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

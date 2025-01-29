@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0dddb6; /* Pastel background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 470px; /* Container width */
+            background: #f2c3b9; /* Pastel color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h2 {
+            font-style: italic;
+            font-weight: bold;
+            color: #444; /* Dark color */
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            text-align: left;
+        }
+        input {
+            width: calc(100% - 30px); /* 30px less than the container width */
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #97b3ae;
+            border-radius: 5px;
+            background: #f7e1e1; /* Light pale pink */
+            height: 40px; /* Increased height */
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #333; /* Slightly darker on hover */
+        }
+        .thumbs-up, .thumbs-down {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+        .warning {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+    <script>
+        function validateEmail() {
+            let email = document.getElementById('email').value;
+            let emailValid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
+            let emailFeedback = document.getElementById('email-feedback');
+            let thumbsUp = document.getElementById('thumbs-up');
+            let thumbsDown = document.getElementById('thumbs-down');
+
+            if (emailValid) {
+                thumbsUp.style.display = 'inline';
+                thumbsDown.style.display = 'none';
+                emailFeedback.textContent = "Valid Email";
+                emailFeedback.style.color = 'green';
+            } else {
+                thumbsDown.style.display = 'inline';
+                thumbsUp.style.display = 'none';
+                emailFeedback.textContent = "Invalid Email";
+                emailFeedback.style.color = 'red';
+            }
+        }
+
+        function checkPasswordStrength() {
+            let password = document.getElementById('password').value;
+            let strengthMessage = document.getElementById('password-strength');
+            let regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
+            if (!regex.test(password)) {
+                strengthMessage.textContent = "Password is weak (must contain letters and numbers)";
+                strengthMessage.style.color = 'red';
+            } else {
+                strengthMessage.textContent = "Password is strong";
+                strengthMessage.style.color = 'green';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form action="pref1.html" method="post">
+            <!-- Username -->
+            <label>Username:</label>
+            <input type="text" name="username" required>
+
+            <!-- Email -->
+            <label>Email:</label>
+            <input type="email" id="email" name="email" required onkeyup="validateEmail()">
+            <span id="email-feedback"></span>
+            <img id="thumbs-up" class="thumbs-up" src="https://img.icons8.com/ios/50/000000/thumbs-up.png" style="display: none;">
+            <img id="thumbs-down" class="thumbs-down" src="https://img.icons8.com/ios/50/000000/thumbs-down.png" style="display: none;">
+
+            <!-- Password -->
+            <label>Password:</label>
+            <input type="password" id="password" name="password" required onkeyup="checkPasswordStrength()">
+            <span id="password-strength"></span>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
