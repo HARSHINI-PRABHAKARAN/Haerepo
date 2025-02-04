@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Handling Demo</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2, h3 {
+            color: #333;
+        }
+        button, input, select {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #83a5c9;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #83a5c9;
+        }
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+        .message {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body onload="window.alert('Welcome to the Formal Event Handling Page!')">
+
+    <div class="container">
+        <h2>Event Handling</h2>
+
+        <!-- OnClick Event -->
+        <div class="form-group">
+            <h3>Click the Button</h3>
+            <button onclick="alert('Button Clicked!')">Click Me</button>
+        </div>
+
+        <!-- OnAbort Event -->
+        <div class="form-group">
+            <h3>Image Load Abort</h3>
+           <!-- <p>(Try stopping the image load to see the alert)</p> -->
+            <img src="heri.jpg" onabort="alert('Image failed to load!')" width="200" height="150" alt="Broken Image">
+        </div>
+
+        <!-- OnSelect Event -->
+        <div class="form-group">
+            <h3>Select the Text Below</h3>
+            <input type="text" value="Select this text" onselect="alert('Text Selected!')" seasion>
+        </div>
+
+        <!-- OnReset Event -->
+        <div class="form-group">
+            <h3>Reset Form Example</h3>
+            <form onreset="alert('Form Reset!')">
+                <input type="text" placeholder="Enter something">
+                <button type="reset">Reset</button>
+            </form>
+        </div>
+
+        <!-- OnKeyDown Event -->
+        <div class="form-group">
+            <h3>Type Something</h3>
+            <input type="text" id="keypressInput" placeholder="Press any key...">
+            <p class="message" id="keyOutput">Pressed Key: None</p>
+        </div>
+    </div>
+
+    <script>
+        // OnKeyDown Event
+        document.getElementById('keypressInput').onkeydown = function(event) {
+            document.getElementById('keyOutput').textContent = "Pressed Key: " + event.key;
+        };
+    </script>
+
+</body>
+</html>
