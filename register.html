@@ -10,9 +10,9 @@
         }
         body {
             display: flex;
-            justify-content: center;  /* Centers horizontally */
-            align-items: center;      /* Centers vertically */
-            height: auto;            /* Full viewport height */
+            justify-content: center;
+            align-items: center;
+            height: auto;
             margin: 0;
             background-color: #f8f9fa;
             padding: 30px;
@@ -55,19 +55,26 @@
             border-radius: 5px;
             font-size: 14px;
         }
-        /*.row {
-            display: flex;
-            justify-content: space-between;
-        }*/
-        .row div {
-            width: 100%;
-        }
 
         .gender-message {
             font-weight: bold;
             color: #007bff;
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
+        }
+
+        .radio-container {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items:center;
+            gap: 2px;
+            margin-bottom: 10px;
         }
 
         button {
@@ -94,15 +101,20 @@
         <p>Please fill out the form below to register.</p>
         
         <form action="login.html" method="POST" onsubmit="saveData()">
-            
             <label>User Name</label>
-            <input type="text" id="last_name" name="username" required placeholder="Enter your name">
+            <input type="text" id="username" name="username" required placeholder="Enter your name">
 
             <label>Email Address</label>
             <input type="email" id="email" name="email" required placeholder="Enter your email">
 
             <label>Phone Number</label>
             <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+
+            <label>Password</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+
+            <label>Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm your password">
 
             <label>Date of Birth</label>
             <input type="date" id="dob" name="dob" required>
@@ -117,102 +129,37 @@
             <p class="gender-message" id="gender-message"></p>
 
             <h3>Delivery Address</h3>
-            <div class="row">
-                <div class="col-sm-4">
-                  <h3>Country</h3>
-                  <select name="country" style="text-align: left" class="countries form-control" id="countryId">
+            <label>Country</label>
+            <select name="country" id="countryId" onchange="updateStates()">
                 <option value="">Select Country</option>
+                <option value="USA">USA</option>
+                <option value="UK">UK</option>
+                <option value="Canada">Canada</option>
             </select>
-            
-                </div>
-                <div class="col-sm-4">
-                  <h3>State</h3>
-                  <select name="state" class="states form-control" id="stateId">
+
+            <label>State</label>
+            <select name="state" id="stateId" onchange="updateCities()">
                 <option value="">Select State</option>
             </select>
-                </div>
-                <div class="col-sm-4">
-                  <h3>City</h3>        
-                  <select name="city" class="cities form-control" id="cityId">
+
+            <label>City</label>
+            <select name="city" id="cityId">
                 <option value="">Select City</option>
             </select>
-                </div>
-            </div>
-            <div class="reyo">
-            <label>Would you like to receive our newsletter?</label>
-            <input type="radio" name="newsletter" value="yes"> Yes
-            <input type="radio" name="newsletter" value="no"> No
 
-            <label>
-                <input type="checkbox" name="terms" required> I agree to the Terms and Conditions and Privacy Policy.
-            </label>
+            <label>Would you like to receive our newsletter?</label>
+            <div class="radio-container">
+                <input type="radio" name="newsletter" value="yes"> Yes
+                <input type="radio" name="newsletter" value="no"> No
             </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" name="terms" required>
+                <label>I agree to the Terms and Conditions and Privacy Policy.</label> 
+            </div>
+
             <button type="submit">Register</button>
         </form>
     </div>
-
-    <script>
-        function showGenderMessage() {
-            const gender = document.getElementById("gender").value;
-            const messageElement = document.getElementById("gender-message");
-            if (gender) {
-                messageElement.textContent = "You selected: " + gender;
-                messageElement.style.opacity = "1";
-            } else {
-                messageElement.style.opacity = "0";
-            }
-        }
-
-        function updateCities() {
-            const country = document.getElementById("country").value;
-            const cityDropdown = document.getElementById("city");
-
-            const cities = {
-                USA: ["New York", "Los Angeles", "Chicago"],
-                UK: ["London", "Manchester", "Birmingham"],
-                Canada: ["Toronto", "Vancouver", "Montreal"]
-            };
-
-            cityDropdown.innerHTML = '<option value="">Select City</option>';
-            if (cities[country]) {
-                cities[country].forEach(city => {
-                    const option = document.createElement("option");
-                    option.value = city;
-                    option.textContent = city;
-                    cityDropdown.appendChild(option);
-                });
-            }
-        }
-
-        function saveData() {
-            const formData = {
-                first_name: document.getElementById("username").value,
-                email: document.getElementById("email").value,
-                phone: document.getElementById("phone").value,
-                dob: document.getElementById("dob").value,
-                gender: document.getElementById("gender").value,
-                country: document.getElementById("country").value,
-                city: document.getElementById("city").value,
-                zip: document.getElementById("zip").value
-            };
-            localStorage.setItem("formData", JSON.stringify(formData));
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const savedData = JSON.parse(localStorage.getItem("formData"));
-            if (savedData) {
-                document.getElementById("username").value = savedData.username || "";
-                document.getElementById("email").value = savedData.email || "";
-                document.getElementById("phone").value = savedData.phone || "";
-                document.getElementById("dob").value = savedData.dob || "";
-                document.getElementById("gender").value = savedData.gender || "";
-                document.getElementById("country").value = savedData.country || "";
-                updateCities();
-                document.getElementById("city").value = savedData.city || "";
-                document.getElementById("zip").value = savedData.zip || "";
-            }
-        });
-    </script>
-
 </body>
 </html>

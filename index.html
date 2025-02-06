@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique Preference Form</title>
+    <link rel="stylesheet" href="css_index.css"> <!-- Link to the external CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Oak Boutique!</h1>
+        <form id="boutiqueForm">
+            <!-- Clothing Style Dropdown -->
+            <label for="clothingStyle">Clothing Style:</label>
+            <select id="clothingStyle" name="clothingStyle">
+                <option value="Casual">Casual</option>
+                <option value="Formal">Formal</option>
+                <option value="Ethnic">Ethnic</option>
+                <option value="Party Wear">Party Wear</option>
+            </select>
+
+            <!-- Dress Image Selection -->
+            <label for="dressSelect"><br><br>Choose a Dress:</label>
+            <select id="dressSelect" name="dressSelect">
+                <option value="dress1">Dress 1</option>
+                <option value="dress2">Dress 2</option>
+                <option value="dress3">Dress 3</option>
+            </select>
+            <br><br>
+            <div id="dressImageContainer">
+                <img id="dressImage" src="" alt="Dress Image" hidden />
+            </div>
+
+            <!-- Textarea -->
+            <textarea id="message" name="message" placeholder="Enter your message"></textarea>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Hover box -->
+        <div id="hoverBox"><p>Hover over me!</p></div>
+    </div>
+
+    <script>
+        // Event listener for page load
+        window.onload = pageLoaded;
+        function pageLoaded() {
+            console.log("Page has loaded.");
+            alert("Welcome to Oak Boutique!");
+        }
+
+        // Onsubmit event for form submission
+        document.getElementById("boutiqueForm").onsubmit = function(event) {
+            event.preventDefault();
+            alert("Form submitted successfully!");
+        };
+
+        // Mouseover & Mouseout events
+        document.getElementById("hoverBox").onmouseover = function() {
+            this.style.backgroundColor = "lightblue";
+        };
+        document.getElementById("hoverBox").onmouseout = function() {
+            this.style.backgroundColor = "lightgray";
+        };
+
+        // Mouse Down event
+        document.getElementById("hoverBox").onmousedown = function() {
+            alert("Mouse button pressed inside the box!");
+        };
+
+        // Mouse Move event
+        function mouseMove(event) {
+            document.getElementById("hoverBox").innerText = `Mouse at X:${event.clientX}, Y:${event.clientY}`;
+        }
+        document.getElementById("hoverBox").onmousemove = mouseMove;
+
+        // Onchange event for dress selection
+        document.getElementById("dressSelect").onchange = function() {
+            const dressImage = document.getElementById("dressImage");
+            dressImage.hidden = false;
+            const dressMap = {
+                "dress1": "C:\\wamp\\www\\Tourism website\\imagesoftour\\dress1.jpeg",
+                "dress2": "C:\\wamp\\www\\Tourism website\\imagesoftour\\dress2.jpeg",
+                "dress3": "C:\\wamp\\www\\Tourism website\\imagesoftour\\dress3.jpeg"
+            };
+            dressImage.src = dressMap[this.value];
+        };
+
+        // Double Click event on hover box
+        document.getElementById("hoverBox").ondblclick = function() {
+            alert("You double-clicked on the box!");
+        };
+
+        // Onselect event for selecting text in the textarea
+        document.getElementById("message").onselect = function() {
+            alert("You selected some text in the textarea!");
+        };
+
+        // Reset event for form reset
+        document.getElementById("boutiqueForm").onreset = function() {
+            alert("Form has been reset!");
+        };
+
+        // Session storage example: Store a user's name
+        sessionStorage.setItem("user", "Guest");
+        console.log("Session User:", sessionStorage.getItem("user"));
+    </script>
+</body>
+</html>
