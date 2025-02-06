@@ -128,14 +128,15 @@
             <button type="submit">Submit</button>
         </form>
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const storedData = localStorage.getItem("formData");
-                if (storedData) {
-                    const data = JSON.parse(storedData);
-                    document.getElementById("login_email").value = data.email;
-                    document.getElementById("login_first_name").value = data.username;
-                }
-            });
+            window.onload = function () {
+                // Get values from sessionStorage
+                const username = sessionStorage.getItem("username");
+                const email = sessionStorage.getItem("email");
+    
+                // Auto-fill login fields
+                if (username) document.getElementById("username").value = username;
+                if (email) document.getElementById("email").value = email;
+            };
         </script>
     </div>
 </body>

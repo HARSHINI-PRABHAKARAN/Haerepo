@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Boutique Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #fffaf0; text-align: center; color: #333; }
+        .container { max-width: 700px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(255, 165, 0, 0.5); }
+        .product { padding: 10px; border-bottom: 1px solid #f0a500; }
+        .btn { padding: 10px 15px; margin: 5px; border: none; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        .btn-add { background-color: #ff8500; color: white; }
+        .btn-discount { background-color: #ffb700; color: white; }
+        .btn-delete { background-color: #ff4500; color: white; }
+        .btn:hover { opacity: 0.8; }
+        #timer { font-size: 20px; font-weight: bold; color: #ff4500; margin-bottom: 15px; }
+        .input-container { margin-bottom: 15px; }
+        input { padding: 10px; margin: 5px; width: 80%; border: 1px solid #ff8500; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Panel - Boutique Management</h2>
+        <p id="timer"></p>
+        
+        <div class="input-container">
+            <input type="text" id="name" placeholder="Product Name">
+            <input type="number" id="price" placeholder="Price">
+            <input type="number" id="stock" placeholder="Stock">
+            <button class="btn btn-add" onclick="addProduct()">Add Product</button>
+        </div>
+        
+        <div id="products"></div>
+    </div>
+
+    <script>
+        // Boutique class definition with getters and setters
+        class Boutique {
+            constructor(name, price, stock) {
+                this.name = name;
+                this.price = price;
+                this._stock = stock; // Underscore to indicate "private"
+            }
+
+            // Getter for stock
+            get stock() {
+                return this._stock;
+            }
+
+            // Setter for stock
+            set stock(value) {
+                if (value < 0) {
+                    console.log("Stock cannot be negative");
+                } else {
+                    this._stock = value;
+                }
+            }
+
+            // Apply discount to product price (multi-line arrow function)
+            applyDiscount = (percent) => {
+                const discount = this.price * percent / 100;
+                return this.price - discount;
+            };
+        }
+
+        // Array to store boutique items
+        const boutiqueItems = [];
+
+        // Function to display products (multi-line arrow function)
+        const displayProducts = () => {
+            const productsDiv = document.getElementById("products");
+            productsDiv.innerHTML = "";
+            
+            boutiqueItems.forEach((item, index) => {
+                const productDiv = document.createElement("div");
+                productDiv.classList.add("product");
+                productDiv.innerHTML = `
+                    <h3>${item.name}</h3>
+                    <p>Price: $${item.price}</p>
+                    <p>Stock: ${item.stock}</p>
+                    <button class="btn btn-discount" onclick="applyDiscount(${index}, 20)">Apply 20% Discount</button>
+                    <button class="btn btn-delete" onclick="deleteProduct(${index})">Delete</button>
+                `;
+                productsDiv.appendChild(productDiv);
+            });
+        };
+
+        // Function to add a new product (multi-line arrow function)
+        const addProduct = () => {
+            const name = document.getElementById("name").value;
+            const price = parseFloat(document.getElementById("price").value);
+            const stock = parseInt(document.getElementById("stock").value);
+            
+            if (name && price > 0 && stock >= 0) {
+                boutiqueItems.push(new Boutique(name, price, stock));
+                displayProducts();
+            } else {
+                alert("Please enter valid product details!");
+            }
+        };
+
+        // Function to apply discount (multi-line arrow function)
+        const applyDiscount = (index, percent) => {
+            const discountedPrice = boutiqueItems[index].applyDiscount(percent);
+            alert(`New price for ${boutiqueItems[index].name}: $${discountedPrice}`);
+        };
+
+        // Function to delete a product (multi-line arrow function)
+        const deleteProduct = (index) => {
+            boutiqueItems.splice(index, 1); // Removes the product from the array
+            displayProducts();
+        };
+
+        // Start countdown for Flash Sale (multi-line arrow function)
+        const startCountdown = (duration) => {
+            let timeRemaining = duration;
+            const timerElement = document.getElementById("timer");
+            
+            const updateTimer = () => {
+                let minutes = Math.floor(timeRemaining / 60);
+                let seconds = timeRemaining % 60;
+                timerElement.textContent = `Flash Sale Ends In: ${minutes}m ${seconds}s`;
+                
+                if (timeRemaining > 0) {
+                    timeRemaining--;
+                    setTimeout(updateTimer, 1000);
+                } else {
+                    timerElement.textContent = "Flash Sale Ended!";
+                }
+            };
+            
+            updateTimer();
+        };
+
+        // Start a 10-minute countdown
+        startCountdown(600); 
+        displayProducts();
+    </script>
+</body>
+</html>
