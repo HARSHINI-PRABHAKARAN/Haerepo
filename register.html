@@ -3,48 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
-    <link rel="stylesheet" href="style1.css">
+    <title>Shopping Registration Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            height: auto;
+            margin: 0;
+            background-color: #f8f9fa;
+            padding: 30px;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            color: #d77d7d;
+            margin-bottom: 10px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            color: #555;
+            text-align: left;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .checkbox-group {
+            
+            display: flex;
+            align-items: center; /* Aligns checkbox and text properly */
+            justify-content: flex-start; /* Aligns everything to the left */
+            gap: 5px; /* Adjust spacing */
+        }
+        
+        .checkbox-group input {
+            width: 20px;
+            margin: 0;
+        }
+        
+        
+        button {
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #d77d7d;
+            color: white;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #FF6B4B;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Registration Form</h2>
-        <p>Please fill out the form below to register.</p>
-        <form id="registrationForm" method="POST" onsubmit="saveData(event)">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required placeholder="Enter your name">
+    <div class="container"> 
+        <h1>Register for Oak Shopping</h1> 
+        <form id="registrationForm" method="POST" action="success.html"> 
+            <label for="name">Full Name</label> 
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required> 
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="Enter your email">
-
-            <label for="password">Password</label>
+            <label for="email">Email</label> 
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            
+            <label for="password">Password</label> 
             <input type="password" id="password" name="password" required>
+            
+            <label for="confirm_password">Confirm Password</label> 
+            <input type="password" id="confirm_password" name="confirm_password" required>
+            <p id="passwordError" class="error"></p>
+            
+            <label for="phone">Phone Number</label> 
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required pattern="[0-9]{10}"> 
 
-            <label for="gender">Gender</label>
-            <select id="gender" name="gender" required>
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
+            <label for="dob">Date of Birth</label> 
+            <input type="date" id="dob" name="dob" required>
+            
+            <label>Gender</label> 
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="Male"> Male</label>
+                <label><input type="radio" name="gender" value="Female"> Female</label>
+                <label><input type="radio" name="gender" value="Other"> Other</label>
+            </div>
+            <p id="genderInfo"></p>
 
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
-
+            <h3>Delivery Address</h3>
             <label for="country">Country</label>
             <select id="country" name="country" required>
                 <option value="">Select Country</option>
                 <option value="USA">USA</option>
                 <option value="UK">UK</option>
-                <option value="India">India</option>
+                <option value="Canada">Canada</option>
             </select>
+            <p id="countryInfo"></p>
 
             <label for="city">City</label>
-            <input type="text" id="city" name="city" required placeholder="Enter your city">
+            <select id="city" name="city" required>
+                <option value="">Select City</option>
+            </select>
+            <p id="cityInfo"></p>
 
-            <button type="submit">Register</button>
-        </form>
-    </div>
-    <script src="script.js"></script>
+            <label>Would you like to receive our newsletter?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="newsletter" value="yes"> Yes</label>
+                <label><input type="radio" name="newsletter" value="no"> No</label>
+            </div><br>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the Terms & Conditions</label>
+            </div><br>
+            
+
+            
+            <button type="submit">Register</button> 
+        </form> 
+    </div> 
+
+    <script> 
+        document.getElementById("confirm_password").addEventListener("input", function() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = this.value;
+            const errorElement = document.getElementById("passwordError");
+            errorElement.textContent = password !== confirmPassword ? "Passwords do not match" : "";
+        });
+
+        const countryCityMap = { 
+            USA: ["New York", "Los Angeles", "Chicago"], 
+            UK: ["London", "Manchester", "Birmingham"], 
+            Canada: ["Toronto", "Vancouver", "Montreal"] 
+        }; 
+
+        document.getElementById("country").addEventListener("change", function() {
+            const country = this.value;
+            const citySelect = document.getElementById("city");
+            citySelect.innerHTML = '<option value="">Select City</option>';
+            
+            if (countryCityMap[country]) {
+                countryCityMap[country].forEach(city => {
+                    const option = document.createElement("option");
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            }
+            document.getElementById("countryInfo").textContent = country ? `Selected country: ${country}` : "";
+        });
+
+        document.getElementById("city").addEventListener("change", function() {
+            document.getElementById("cityInfo").textContent = this.value ? `Selected city: ${this.value}` : "";
+        });
+    </script> 
 </body>
 </html>

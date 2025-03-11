@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "name": "shoes",
+      "price": "2500",
+      "stock": 8,
+      "id": "b9f8"
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "customer": "Alice",
+      "total": 130,
+      "status": "Pending"
+    }
+  ],
+  "customers": [
+    {
+      "id": "1",
+      "name": "Alice",
+      "email": "alice@example.com"
+    }
+  ]
+}
