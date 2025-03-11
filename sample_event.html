@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    /*<meta http-equiv="refresh" content="5"> <!-- Refreshes every 5 seconds -->*/
+
+    <title>Event Attributes Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            display: inline-block;
+            line-height: 200px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        // onload event
+        window.onload = function() {
+            document.getElementById("welcome").innerText = "Page Loaded Successfully!";
+        };
+
+        function showMessage() {
+            alert("Button Clicked!");
+        }
+
+        function changeText() {
+            let inputValue = document.getElementById("textInput").value;
+            document.getElementById("output").innerText = "You typed: " + inputValue;
+        }
+
+        function changeColor() {
+            document.getElementById("box").style.backgroundColor = "lightcoral";
+        }
+
+        function resetColor() {
+            document.getElementById("box").style.backgroundColor = "lightblue";
+        }
+
+        function doubleClickMessage() {
+            alert("You double-clicked the box!");
+        }
+
+        function showResizeMessage() {
+            console.log("Window Resized!");
+        }
+
+        window.onresize = showResizeMessage;
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h2>JavaScript Event Attributes Demo</h2>
+        <p id="welcome"></p>
+
+        <!-- onclick event -->
+        <button onclick="showMessage()">Click Me</button>
+
+        <br>
+
+        <!-- onchange event -->
+        <label for="textInput">Type something:</label>
+        <input type="text" id="textInput" onchange="changeText()" >
+        <p id="output"></p>
+
+        <!-- onmouseover, onmouseout, ondblclick event -->
+        <div id="box" class="box" onmouseover="changeColor()" onmouseout="resetColor()" ondblclick="doubleClickMessage()">
+            Hover Me
+        </div>
+
+    </div>
+
+</body>
+</html>
